@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+
+import { ConvertForm } from "./components/ConverForm";
+import { Header } from "./components/Header";
+import { Toaster } from "./components/Toaster";
+
+import { allCurrency } from "./store/slice/thunk";
+import { useAppDispatch } from "./store/store";
 
 function App() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(allCurrency());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Toaster />
+      <Header />
+      <ConvertForm />
     </div>
   );
 }
